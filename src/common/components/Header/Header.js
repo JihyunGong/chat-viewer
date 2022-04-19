@@ -7,10 +7,6 @@ import styled from 'styled-components';
 export default function Header({ setSort, setModalOn, setUserInput }) {
   return (
     <header>
-      <HeaderDiv>
-        <button><Link to='/'>친구 목록</Link></button>
-        <button><Link to='/chats'>채팅 목록</Link></button>
-      </HeaderDiv>
       <select
         name="order"
         id="order"
@@ -19,6 +15,10 @@ export default function Header({ setSort, setModalOn, setUserInput }) {
         <option value="ascending">이름 오름차순</option>
         <option value="descending">이름 내림차순</option>
       </select>
+      <HeaderDiv>
+        <button><Link to='/'>친구 목록</Link></button>
+        <button><Link to='/chats'>채팅 목록</Link></button>
+      </HeaderDiv>
       <SearchInput setSearchKeyword={setUserInput} />
       <AddButton onClick={() => setModalOn(true)}>친구 추가</AddButton> 
       <hr />
@@ -31,13 +31,14 @@ const HeaderDiv = styled.nav`
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  margin-bottom: 20px;
 
   button {
-    background-color: #ffdf75;
+    background-color: #ffe045;
     padding: 30px;
     margin-left: 50px;
-    border-radius: 25px;
-    border: 2px solid #d9a600;
+    border-radius: 15px;
+    border: none;
     text-decoration: none;
     
     &:link,
@@ -50,10 +51,9 @@ const HeaderDiv = styled.nav`
 `;
   
 const AddButton = styled.button`
-  background-color: #d9a600;
+  background-color: #ffe045;
   padding: 10px;
   border-radius: 15px;
-  border: 2px solid #ffdf75;
+  border: none;
   float: right;
-  
 `; 

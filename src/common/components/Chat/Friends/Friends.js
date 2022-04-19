@@ -20,16 +20,16 @@ export default function Friends({ userInput, sort, setModalOn, setChattingFriend
         <Table>
           <tbody>
             <tr>
-              <td>
+              <ImgTd>
                 <img
-                  src='https://static.xx.fbcdn.net/assets/?revision=816167972411634&name=desktop-creating-an-account-icon&density=1'
+                  src='https://publicdomainvectors.org/tn_img/abstract-user-flat-4.webp'
                   alt='profile'
-                  width='70px'
-                  height='70px'
+                  width='60px'
+                  height='60px'
                 />
-              </td>
-              <td>{friend.name}</td>
-              <td onClick={() => handleClick(friend)}><button>대화 시작</button></td>
+              </ImgTd>
+              <NameTd>{friend.name}</NameTd>
+              <td onClick={() => handleClick(friend)}><Button>대화 시작</Button></td>
             </tr>
           </tbody>
         </Table>
@@ -46,16 +46,16 @@ export default function Friends({ userInput, sort, setModalOn, setChattingFriend
         <tbody>
           {sortedFriendLists.map((friend) => (
             <tr key={friend.id}>
-              <td>
+              <ImgTd>
                 <img
-                  src='https://static.xx.fbcdn.net/assets/?revision=816167972411634&name=desktop-creating-an-account-icon&density=1'
+                  src='https://publicdomainvectors.org/tn_img/abstract-user-flat-4.webp'
                   alt='profile'
-                  width='70px'
-                  height='70px'
+                  width='60px'
+                  height='60px'
                 />
-              </td>
-              <td>{friend.name}</td>
-              <td onClick={() => handleClick(friend)}><button>대화 시작</button></td>
+              </ImgTd>
+              <NameTd>{friend.name}</NameTd>
+              <td onClick={() => handleClick(friend)}><Button>대화 시작</Button></td>
             </tr>
           ))}
         </tbody>
@@ -68,9 +68,25 @@ export default function Friends({ userInput, sort, setModalOn, setChattingFriend
 
 const Table = styled.table`
   width: 100%;
+  border-collapse: collapse;
 
-  td {
-    padding: 10px;
+  tr {
     border-bottom: 1px solid;
   }
+`;
+
+const ImgTd = styled.td`
+  width: 15%;
+`;
+
+const NameTd = styled.td`
+  // width: 70%;
+`;
+
+const Button = styled.button`
+  background-color: #ffe98a;
+  border: none;
+  border-radius: 10px;
+  padding: 7px;
+  float: right;
 `;

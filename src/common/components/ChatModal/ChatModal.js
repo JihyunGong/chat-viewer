@@ -1,12 +1,14 @@
 import React from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Portal from "../Portal/Portal";
 import { saveChatRooms } from "../../../features/chat";
+import getChattingMessages from "../../utils/getChattingMessages";
+import { format } from "date-fns";
 import styled from "styled-components";
 
 export default function ChatModal({ friend, setModalOn }) {
-  const chatLists = useSelector((state) => state.chatRooms);
-  console.log(chatLists);
+  const chatLists = useSelector((state) => state.chatRooms.chatRooms);
+  const chattingMessages = getChattingMessages(friend.id, chatLists);
 
   const dispatch = useDispatch();
 
@@ -15,16 +17,28 @@ export default function ChatModal({ friend, setModalOn }) {
   };
 
   function handleSend() {
-    messageInfo.date = new Date();
-    dispatch(saveChatRooms(friend.id, messageInfo));
+    if (messageInfo.content) {
+      messageInfo.date = new Date();
+      dispatch(saveChatRooms(friend.id, messageInfo));
+    }
   }
 
   return (
     <Portal>
       <Background>
         <Content>
-          <HeaderDiv>{friend.name}</HeaderDiv>
-          <hr />
+          <Header>
+            {friend.name}
+            <CloseButton onClick={() => setModalOn(false)}>&#706;</CloseButton>
+          </Header>
+          {chattingMessages &&
+            chattingMessages.messages.map((message) => (
+              <>
+              <TextBox>{message.content}</TextBox>
+              <div>{format(message.date, "yyyy-MM-dd'('HH:mm')'")}</div>
+              </>
+            ))
+          }
           <Textarea
             placeholder="내용을 입력하세요."
             value={messageInfo.content}
@@ -33,7 +47,6 @@ export default function ChatModal({ friend, setModalOn }) {
             onChange={(ev) => messageInfo.content = ev.target.value}
           />
           <SendButton onClick={handleSend}>전송</SendButton>
-          <CloseButton onClick={() => setModalOn(false)}>&#706;</CloseButton>
         </Content>
       </Background>
     </Portal>
@@ -62,24 +75,37 @@ const Content = styled.div`
   border: 3px solid;
 `;
 
-const HeaderDiv = styled.div`
+const Header = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ffe045;
+  border-bottom: 2px solid;
+`;
+
+const TextBox = styled.div`
+  background-color: #fff29c;
+  border: 1px solid;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
 `;
 
 const Textarea = styled.textarea`
-  position: absolute;
-  left: 0;
-  right: 0;
+  position: sticky;
   bottom: 0;
+  width: 98%;
+  // left: 0;
+  // right: 0;
   resize: none;
 `;
 
 const SendButton = styled.button`
-  position: absolute;
-  right: 0;
+  position: sticky;
   bottom: 0;
+  right: 0;
 `;
 
 const CloseButton = styled.button`

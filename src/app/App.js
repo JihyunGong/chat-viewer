@@ -19,7 +19,7 @@ export default function App() {
       <Header setSort={setSort} setModalOn={setAddFriendModalOn} setUserInput={setUserInput} />
       <Routes>
         <Route path='/' element={<Friends userInput={userInput} sort={sort} setModalOn={setChatModalOn} setChattingFriend={setChattingFriend}/>} />
-        <Route path='/chats' element={<Chats setModalOn={setChatModalOn}/>} />
+        <Route path='/chats' element={<Chats userInput={userInput} setChattingFriend={setChattingFriend} setModalOn={setChatModalOn}/>} />
       </Routes>
       {addFriendModalOn &&
         <AddFriendModal setModalOn={setAddFriendModalOn} />
