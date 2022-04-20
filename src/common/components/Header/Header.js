@@ -1,26 +1,25 @@
 import React from 'react';
-// import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { Link } from 'react-router-dom';
 import SearchInput from '../SearchInput/SearchInput';
 import styled from 'styled-components';
 
-export default function Header({ setSort, setModalOn, setUserInput }) {
+export default function Header({ setSorting, showAddForm, setUserInput }) {
   return (
     <header>
       <select
         name="order"
         id="order"
-        onChange={(ev) => setSort(ev.target.value)}
+        onChange={(ev) => setSorting(ev.target.value)}
       >
-        <option value="ascending">이름 오름차순</option>
-        <option value="descending">이름 내림차순</option>
+        <option value="ascending">오름차순</option>
+        <option value="descending">내림차순</option>
       </select>
       <HeaderDiv>
         <button><Link to='/'>친구 목록</Link></button>
         <button><Link to='/chats'>채팅 목록</Link></button>
       </HeaderDiv>
       <SearchInput setSearchKeyword={setUserInput} />
-      <AddButton onClick={() => setModalOn(true)}>친구 추가</AddButton> 
+      <NewButton onClick={() => showAddForm(true)}>친구 추가</NewButton>
       <hr />
     </header>
   );
@@ -36,21 +35,14 @@ const HeaderDiv = styled.nav`
   button {
     background-color: #ffe045;
     padding: 30px;
-    margin-left: 50px;
     border-radius: 15px;
     border: none;
-    text-decoration: none;
-    
-    &:link,
-    &:visited,
-    &:hover,
-    &:active {
-      text-decoration: none;
-    }
+    margin-left: 50px;
+    margin-right: 50px
   }
 `;
-  
-const AddButton = styled.button`
+
+const NewButton = styled.button`
   background-color: #ffe045;
   padding: 10px;
   border-radius: 15px;

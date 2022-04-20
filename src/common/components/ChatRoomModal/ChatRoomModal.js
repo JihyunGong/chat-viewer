@@ -1,22 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Portal from "../Portal/Portal";
 import { saveChatRooms } from "../../../features/chat";
-import getChattingMessages from "../../utils/getChattingMessages";
+import getMessages from "../../utils/getMessages";
 import { format } from "date-fns";
+import Portal from "../Portal/Portal";
 import styled from "styled-components";
 
 export default function ChatModal({ friend, setModalOn }) {
-  const chatLists = useSelector((state) => state.chatRooms.chatRooms);
-  const chattingMessages = getChattingMessages(friend.id, chatLists);
-
   const dispatch = useDispatch();
+
+  const chatLists = useSelector((state) => state.chatRooms.chatRooms);
+  const chatMessages = getMessages(friend.id, chatLists);
 
   const messageInfo = {
     id: -1,
   };
 
-  function handleSend() {
+  function handleClick() {
     if (messageInfo.content) {
       messageInfo.date = new Date();
       dispatch(saveChatRooms(friend.id, messageInfo));
@@ -31,14 +31,17 @@ export default function ChatModal({ friend, setModalOn }) {
             {friend.name}
             <CloseButton onClick={() => setModalOn(false)}>&#706;</CloseButton>
           </Header>
-          {chattingMessages &&
-            chattingMessages.messages.map((message) => (
+          {chatMessages &&
+            chatMessages.messages.map((message) => (
               <>
-              <TextBox>{message.content}</TextBox>
-              <div>{format(message.date, "yyyy-MM-dd'('HH:mm')'")}</div>
+                {message.id === -1 ?
+                  <div>나</div> :
+                  <div>{friend.name}</div>
+                }
+                <TextBox>{message.content}</TextBox>
+                <div>{format(message.date, "yyyy-MM-dd' ['HH:mm']'")}</div>
               </>
-            ))
-          }
+            ))}
           <Textarea
             placeholder="내용을 입력하세요."
             value={messageInfo.content}
@@ -46,7 +49,7 @@ export default function ChatModal({ friend, setModalOn }) {
             col="30"
             onChange={(ev) => messageInfo.content = ev.target.value}
           />
-          <SendButton onClick={handleSend}>전송</SendButton>
+          <SendButton onClick={handleClick}>전송</SendButton>
         </Content>
       </Background>
     </Portal>
@@ -97,8 +100,6 @@ const Textarea = styled.textarea`
   position: sticky;
   bottom: 0;
   width: 98%;
-  // left: 0;
-  // right: 0;
   resize: none;
 `;
 

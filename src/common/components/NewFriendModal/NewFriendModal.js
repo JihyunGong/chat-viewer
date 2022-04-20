@@ -1,22 +1,19 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addFriend } from "../../../features/chat";
+import isAlreadyExisting from "../../utils/isAlreadyExisting";
 import Portal from "../Portal/Portal";
 import styled from "styled-components";
 
 export default function Modal({ setModalOn }) {
   const dispatch = useDispatch();
-  const friendInfo = {};
 
   const friends = useSelector((state) => state.friends.friends);
+  const friendInfo = {};
 
   function handleSubmit() {
-    const isAlreadyExisting = friends.some((friend) =>
-      friend.phoneNumber === friendInfo.phoneNumber
-    );
-
-    if (isAlreadyExisting) {
-      alert("입력하신 친구의 정보는 이미 존재합니다!");
+    if (isAlreadyExisting(friends, friendInfo)) {
+      alert("입력하신 친구의 정보는 이미 존재합니다.");
     } else {
       dispatch(addFriend(friendInfo));
     }
@@ -46,7 +43,7 @@ export default function Modal({ setModalOn }) {
               />
             </FormDiv>
           </form>
-          <SubmitButton onClick={handleSubmit}>Save</SubmitButton>
+          <SubmitButton onClick={handleSubmit}>추가</SubmitButton>
           <CloseButton onClick={() => setModalOn(false)}>X</CloseButton>
         </Content>
       </Background>

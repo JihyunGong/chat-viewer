@@ -7,9 +7,8 @@ const initialState = {
 export default function chatRooms(state = initialState, action) {
   switch (action.type) {
     case SAVE_CHATROOMS: {
-      console.log(action.payload);
       const newMessage = action.payload;
-      const existingChatRoom = state.chatRooms.find((chatRoom) => Number(chatRoom.id) === Number(newMessage.id));
+      const existingChatRoom = state.chatRooms.find((chatRoom) => chatRoom.id === newMessage.id);
 
       if (existingChatRoom) {
         for (const chatRoom of state.chatRooms) {
@@ -19,13 +18,12 @@ export default function chatRooms(state = initialState, action) {
         }
 
         return state;
-      } else {
-        return {
-          ...state,
-          chatRooms: [...state.chatRooms, newMessage]
-        };
       }
 
+      return {
+        ...state,
+        chatRooms: [...state.chatRooms, newMessage]
+      };
     }
     default: {
       return state;

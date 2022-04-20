@@ -1,19 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import sortFriends from '../../../utils/sortFriends';
+import sortByNames from '../../../utils/sortByNames';
+import getOnChattingFriend from '../../../utils/getOnChattingFriend';
 import styled from 'styled-components';
 
-export default function Friends({ userInput, sort, setModalOn, setChattingFriend }) {
-  const friendLists = useSelector((state) => state.friends.friends);
-  const sortedFriendLists = sortFriends(sort, friendLists);
+export default function FriendLists({ searchKeyword, sorting, setOnChattingFriend, setModalOn }) {
+  const friends = sortByNames(sorting, useSelector((state) => state.friends.friends));
 
-  function handleClick(chattingFriend) {
-    setChattingFriend(chattingFriend);
+  function handleClick(onChattingFriend) {
+    setOnChattingFriend(onChattingFriend);
     setModalOn(true);
   }
 
-  if (userInput) {
-    const friend = sortedFriendLists.find((friend) => friend.name.toLowerCase() === userInput.toLowerCase());
+  if (searchKeyword) {
+    const friend = getOnChattingFriend(searchKeyword, friends);
 
     if (friend) {
       return (
@@ -28,8 +28,8 @@ export default function Friends({ userInput, sort, setModalOn, setChattingFriend
                   height='60px'
                 />
               </ImgTd>
-              <NameTd>{friend.name}</NameTd>
-              <td onClick={() => handleClick(friend)}><Button>대화 시작</Button></td>
+              <td>{friend.name}</td>
+              <td onClick={() => handleClick(friend)}><Button>대화 하기</Button></td>
             </tr>
           </tbody>
         </Table>
@@ -39,12 +39,12 @@ export default function Friends({ userInput, sort, setModalOn, setChattingFriend
     alert("입력하신 이름과 일치하는 친구가 없습니다.");
   }
 
-  if (sortedFriendLists.length) {
-    return (
+  return (
+    <>
+      <div>친구 {friends.length}</div>
       <Table>
-        <div>친구 {sortedFriendLists.length}</div>
         <tbody>
-          {sortedFriendLists.map((friend) => (
+          {friends.map((friend) => (
             <tr key={friend.id}>
               <ImgTd>
                 <img
@@ -54,16 +54,14 @@ export default function Friends({ userInput, sort, setModalOn, setChattingFriend
                   height='60px'
                 />
               </ImgTd>
-              <NameTd>{friend.name}</NameTd>
-              <td onClick={() => handleClick(friend)}><Button>대화 시작</Button></td>
+              <td>{friend.name}</td>
+              <td onClick={() => handleClick(friend)}><Button>대화 하기</Button></td>
             </tr>
           ))}
         </tbody>
       </Table>
-    );
-  }
-
-  return <div>친구 {sortedFriendLists.length}</div>
+    </>
+  );
 }
 
 const Table = styled.table`
@@ -77,10 +75,6 @@ const Table = styled.table`
 
 const ImgTd = styled.td`
   width: 15%;
-`;
-
-const NameTd = styled.td`
-  // width: 70%;
 `;
 
 const Button = styled.button`
