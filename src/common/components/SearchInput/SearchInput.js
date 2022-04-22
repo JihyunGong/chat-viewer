@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
 export default function SearchInput({ setSearchKeyword }) {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
 
   return (
     <>
       <Input
-        type="text"
-        placeholder="친구 이름을 검색하세요."
+        type='text'
+        placeholder='친구 이름을 검색하세요.'
         value={keyword}
         onChange={(ev) => setKeyword(ev.target.value)}
       />

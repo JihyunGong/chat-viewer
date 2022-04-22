@@ -41,7 +41,7 @@ export default function Chats({ searchKeyword, sorting, setOnChattingFriend, set
       );
     }
 
-    alert("입력하신 이름을 가진 친구와의 채팅방이 없습니다.");
+    alert('입력하신 이름을 가진 친구와의 채팅방이 없습니다.');
   }
 
   return (

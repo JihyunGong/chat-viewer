@@ -8,10 +8,10 @@ import NewFriendModal from '../common/components/NewFriendModal/NewFriendModal';
 import ChatRoomModal from '../common/components/ChatRoomModal/ChatRoomModal';
 
 export default function App() {
-  const [sorting, setSorting] = useState("ascending");
+  const [sorting, setSorting] = useState('ascending');
   const [newFriendModalOn, setNewFriendModalOn] = useState(false);
   const [chatRoomModalOn, setChatRoomModalOn] = useState(false);
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState('');
   const [onChattingFriend, setOnChattingFriend] = useState({});
 
   return (

@@ -1,8 +1,8 @@
 export default async function getInitialData() {
-  const res = await fetch("/data.json", {
+  const res = await fetch('/data.json', {
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
   });
 

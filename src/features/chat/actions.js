@@ -1,4 +1,4 @@
-import { ADD_FRIEND, SAVE_CHATROOMS } from "./types";
+import { ADD_FRIEND, SAVE_CHATROOMS } from './types';
 
 let nextFriendId = 0;
 

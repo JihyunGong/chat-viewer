@@ -36,7 +36,7 @@ export default function FriendLists({ searchKeyword, sorting, setOnChattingFrien
       );
     }
 
-    alert("입력하신 이름과 일치하는 친구가 없습니다.");
+    alert('입력하신 이름과 일치하는 친구가 없습니다.');
   }
 
   return (

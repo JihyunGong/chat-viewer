@@ -1,10 +1,10 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { saveChatRooms } from "../../../features/chat";
-import getMessages from "../../utils/getMessages";
-import { format } from "date-fns";
-import Portal from "../Portal/Portal";
-import styled from "styled-components";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveChatRooms } from '../../../features/chat';
+import getMessages from '../../utils/getMessages';
+import { format } from 'date-fns';
+import Portal from '../Portal/Portal';
+import styled from 'styled-components';
 
 export default function ChatModal({ friend, setModalOn }) {
   const dispatch = useDispatch();
@@ -43,10 +43,10 @@ export default function ChatModal({ friend, setModalOn }) {
               </>
             ))}
           <Textarea
-            placeholder="내용을 입력하세요."
+            placeholder='내용을 입력하세요.'
             value={messageInfo.content}
-            rows="3"
-            col="30"
+            rows='3'
+            col='30'
             onChange={(ev) => messageInfo.content = ev.target.value}
           />
           <SendButton onClick={handleClick}>전송</SendButton>

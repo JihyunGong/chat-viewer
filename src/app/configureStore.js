@@ -1,5 +1,5 @@
-import { combineReducers, applyMiddleware, createStore } from "redux";
-import logger from "redux-logger";
+import { combineReducers, applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
 import { friends, chatRooms } from '../features/chat';
 
 const reducer = combineReducers({

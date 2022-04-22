@@ -7,12 +7,12 @@ export default function Header({ setSorting, showAddForm, setUserInput }) {
   return (
     <header>
       <select
-        name="order"
-        id="order"
+        name='order'
+        id='order'
         onChange={(ev) => setSorting(ev.target.value)}
       >
-        <option value="ascending">오름차순</option>
-        <option value="descending">내림차순</option>
+        <option value='ascending'>오름차순</option>
+        <option value='descending'>내림차순</option>
       </select>
       <HeaderDiv>
         <button><Link to='/'>친구 목록</Link></button>

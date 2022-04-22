@@ -1,4 +1,4 @@
-import { SAVE_CHATROOMS } from "../types";
+import { SAVE_CHATROOMS } from '../types';
 
 const initialState = {
   chatRooms: []

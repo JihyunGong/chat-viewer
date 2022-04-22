@@ -1,4 +1,4 @@
-import { ADD_FRIEND } from "../types";
+import { ADD_FRIEND } from '../types';
 
 const initialState = {
   friends: []

@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addFriend } from "../../../features/chat";
-import isAlreadyExisting from "../../utils/isAlreadyExisting";
-import Portal from "../Portal/Portal";
-import styled from "styled-components";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addFriend } from '../../../features/chat';
+import isAlreadyExisting from '../../utils/isAlreadyExisting';
+import Portal from '../Portal/Portal';
+import styled from 'styled-components';
 
 export default function Modal({ setModalOn }) {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function Modal({ setModalOn }) {
 
   function handleSubmit() {
     if (isAlreadyExisting(friends, friendInfo)) {
-      alert("입력하신 친구의 정보는 이미 존재합니다.");
+      alert('입력하신 친구의 정보는 이미 존재합니다.');
     } else {
       dispatch(addFriend(friendInfo));
     }
@@ -28,16 +28,16 @@ export default function Modal({ setModalOn }) {
           <form>
             <FormDiv>
               <input
-                type="text"
-                placeholder="이름"
+                type='text'
+                placeholder='이름'
                 value={friendInfo.name}
                 onChange={(ev) => friendInfo.name = ev.target.value}
               />
             </FormDiv>
             <FormDiv>
               <input
-                type="number"
-                placeholder="연락처"
+                type='number'
+                placeholder='연락처'
                 value={friendInfo.phoneNumber}
                 onChange={(ev) => friendInfo.phoneNumber = ev.target.value}
               />
