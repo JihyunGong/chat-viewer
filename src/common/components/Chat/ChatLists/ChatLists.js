@@ -1,23 +1,23 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import sortByDates from '../../../utils/sortByDates';
+import getOnChattingFriend from '../../../utils/getOnChattingFriend';
 import { format } from 'date-fns';
 import styled from 'styled-components';
-import getOnChattingFriend from '../../../utils/getOnChattingFriend';
 
-export default function Chats({ searchKeyword, sorting, setOnChattingFriend, setModalOn }) {
+export default function ChatLists({ searchKeyword, sorting, setOnChattingFriend, setModalOn }) {
   const friends = useSelector((state) => state.friends.friends);
   const chatRooms = sortByDates(sorting, useSelector((state) => state.chatRooms.chatRooms));
 
-  function handleClick(chatId) {
-    const friend = friends.find((friend) => friend.id === chatId);
+  function handleClick(chatRoomId) {
+    const friend = friends.find((friend) => friend.id === chatRoomId);
     setOnChattingFriend(friend);
     setModalOn(true);
   }
 
   if (searchKeyword) {
     const friend = getOnChattingFriend(searchKeyword, friends);
-    const chatRoom = friend ? chatRooms.find((chat) => chat.id === friend.id) : undefined;
+    const chatRoom = friend ? chatRooms.find((chatRoom) => chatRoom.id === friend.id) : undefined;
 
     if (chatRoom) {
       return (
@@ -49,11 +49,11 @@ export default function Chats({ searchKeyword, sorting, setOnChattingFriend, set
       <div>채팅 {chatRooms.length}</div>
       <Table>
         <tbody>
-          {chatRooms.map((room) => {
-            const friend = friends.find((friend) => friend.id === room.id);
+          {chatRooms.map((chatRoom) => {
+            const friend = friends.find((friend) => friend.id === chatRoom.id);
 
             return (
-              <tr key={room.id} onClick={() => handleClick(room.id)}>
+              <tr key={chatRoom.id} onClick={() => handleClick(chatRoom.id)}>
                 <ImgTd>
                   <img
                     src='https://publicdomainvectors.org/tn_img/abstract-user-flat-4.webp'
@@ -63,8 +63,8 @@ export default function Chats({ searchKeyword, sorting, setOnChattingFriend, set
                   />
                 </ImgTd>
                 <NameTd>{friend.name}</NameTd>
-                <ContentTd>{room.messages[room.messages.length - 1].content}</ContentTd>
-                <DateTd>{format(room.messages[room.messages.length - 1].date, "yyyy-MM-dd' ['HH:mm']'")}</DateTd>
+                <ContentTd>{chatRoom.messages[chatRoom.messages.length - 1].content}</ContentTd>
+                <DateTd>{format(chatRoom.messages[chatRoom.messages.length - 1].date, "yyyy-MM-dd' ['HH:mm']'")}</DateTd>
               </tr>
             );
           })}

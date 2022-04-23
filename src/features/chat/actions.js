@@ -12,12 +12,12 @@ export function addFriend(friendInfo) {
   };
 }
 
-export function saveChatRooms(userId, message) {
+export function saveChatRooms(friendId, messageInfo) {
   return {
     type: SAVE_CHATROOMS,
     payload: {
-      id: userId,
-      messages: [message]
+      id: friendId,
+      messages: [messageInfo]
     }
   }
 }

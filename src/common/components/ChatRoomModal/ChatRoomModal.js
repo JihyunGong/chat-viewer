@@ -1,19 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveChatRooms } from '../../../features/chat';
-import getMessages from '../../utils/getMessages';
-import { format } from 'date-fns';
+import getOnChattingRoom from '../../utils/getOnChattingRoom';
 import Portal from '../Portal/Portal';
+import { format } from 'date-fns';
 import styled from 'styled-components';
 
-export default function ChatModal({ friend, setModalOn }) {
+export default function ChatRoomModal({ friend, setModalOn }) {
   const dispatch = useDispatch();
 
-  const chatLists = useSelector((state) => state.chatRooms.chatRooms);
-  const chatMessages = getMessages(friend.id, chatLists);
+  const chatRooms = useSelector((state) => state.chatRooms);
+  const onChattingRoom = getOnChattingRoom(friend.id, chatRooms.chatRooms);
 
   const messageInfo = {
-    id: -1,
+    messageId: -1,
   };
 
   function handleClick() {
@@ -31,16 +31,16 @@ export default function ChatModal({ friend, setModalOn }) {
             {friend.name}
             <CloseButton onClick={() => setModalOn(false)}>&#706;</CloseButton>
           </Header>
-          {chatMessages &&
-            chatMessages.messages.map((message) => (
-              <>
-                {message.id === -1 ?
+          {onChattingRoom !== undefined &&
+            onChattingRoom.messages.map((message, index) => (
+              <div key={index}>
+                {message.messageId === -1 ?
                   <div>나</div> :
                   <div>{friend.name}</div>
                 }
                 <TextBox>{message.content}</TextBox>
                 <div>{format(message.date, "yyyy-MM-dd' ['HH:mm']'")}</div>
-              </>
+              </div>
             ))}
           <Textarea
             placeholder='내용을 입력하세요.'

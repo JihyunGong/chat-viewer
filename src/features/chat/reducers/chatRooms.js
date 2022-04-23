@@ -7,22 +7,18 @@ const initialState = {
 export default function chatRooms(state = initialState, action) {
   switch (action.type) {
     case SAVE_CHATROOMS: {
-      const newMessage = action.payload;
-      const existingChatRoom = state.chatRooms.find((chatRoom) => chatRoom.id === newMessage.id);
+      const newChatRoom = action.payload;
+      const existingChatRoom = state.chatRooms.find((chatRoom) => chatRoom.id === newChatRoom.id);
 
       if (existingChatRoom) {
-        for (const chatRoom of state.chatRooms) {
-          if (JSON.stringify(chatRoom) === JSON.stringify(existingChatRoom)) {
-            chatRoom.messages.push(...(newMessage.messages));
-          }
-        }
+        existingChatRoom.messages.push(...newChatRoom.messages);
 
-        return state;
+        return { ...state };
       }
 
       return {
         ...state,
-        chatRooms: [...state.chatRooms, newMessage]
+        chatRooms: [...state.chatRooms, newChatRoom]
       };
     }
     default: {

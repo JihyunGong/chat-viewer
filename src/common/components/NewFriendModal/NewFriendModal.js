@@ -5,14 +5,14 @@ import isAlreadyExisting from '../../utils/isAlreadyExisting';
 import Portal from '../Portal/Portal';
 import styled from 'styled-components';
 
-export default function Modal({ setModalOn }) {
+export default function NewFriendModal({ setModalOn }) {
   const dispatch = useDispatch();
 
-  const friends = useSelector((state) => state.friends.friends);
+  const friends = useSelector((state) => state.friends);
   const friendInfo = {};
 
   function handleSubmit() {
-    if (isAlreadyExisting(friends, friendInfo)) {
+    if (isAlreadyExisting(friends.friends, friendInfo)) {
       alert('입력하신 친구의 정보는 이미 존재합니다.');
     } else {
       dispatch(addFriend(friendInfo));
