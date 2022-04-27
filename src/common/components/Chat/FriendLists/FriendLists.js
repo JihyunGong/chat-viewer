@@ -5,7 +5,7 @@ import getOnChattingFriend from '../../../utils/getOnChattingFriend';
 import styled from 'styled-components';
 
 export default function FriendLists({ searchKeyword, sorting, setOnChattingFriend, setModalOn }) {
-  const friends = sortByNames(sorting, useSelector((state) => state.friends.friends));
+  const friends = sortByNames(sorting, useSelector((state) => state.friends).friends);
 
   function handleClick(onChattingFriend) {
     setOnChattingFriend(onChattingFriend);

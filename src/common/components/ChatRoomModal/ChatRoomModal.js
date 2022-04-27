@@ -9,8 +9,8 @@ import styled from 'styled-components';
 export default function ChatRoomModal({ friend, setModalOn }) {
   const dispatch = useDispatch();
 
-  const chatRooms = useSelector((state) => state.chatRooms);
-  const onChattingRoom = getOnChattingRoom(friend.id, chatRooms.chatRooms);
+  const chatRooms = useSelector((state) => state.chatRooms).chatRooms;
+  const onChattingRoom = getOnChattingRoom(friend.id, chatRooms);
 
   const messageInfo = {
     messageId: -1,

@@ -6,8 +6,8 @@ import { format } from 'date-fns';
 import styled from 'styled-components';
 
 export default function ChatLists({ searchKeyword, sorting, setOnChattingFriend, setModalOn }) {
-  const friends = useSelector((state) => state.friends.friends);
-  const chatRooms = sortByDates(sorting, useSelector((state) => state.chatRooms.chatRooms));
+  const friends = useSelector((state) => state.friends).friends;
+  const chatRooms = sortByDates(sorting, useSelector((state) => state.chatRooms).chatRooms);
 
   function handleClick(chatRoomId) {
     const friend = friends.find((friend) => friend.id === chatRoomId);
@@ -34,7 +34,7 @@ export default function ChatLists({ searchKeyword, sorting, setOnChattingFriend,
               </ImgTd>
               <NameTd>{friend.name}</NameTd>
               <ContentTd>{chatRoom.messages[chatRoom.messages.length - 1].content}</ContentTd>
-              <DateTd>{format(chatRoom.messages[chatRoom.messages.length - 1].date, "yyyy-MM-dd' ['HH:mm']'")}</DateTd>
+              <DateTd>{format(JSON.parseISO(chatRoom.messages[chatRoom.messages.length - 1].date), "yyyy-MM-dd' ['HH:mm']'")}</DateTd>
             </tr>
           </tbody>
         </Table>

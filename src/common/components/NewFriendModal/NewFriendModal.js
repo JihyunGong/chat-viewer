@@ -8,11 +8,11 @@ import styled from 'styled-components';
 export default function NewFriendModal({ setModalOn }) {
   const dispatch = useDispatch();
 
-  const friends = useSelector((state) => state.friends);
+  const friends = useSelector((state) => state.friends).friends;
   const friendInfo = {};
 
   function handleSubmit() {
-    if (isAlreadyExisting(friends.friends, friendInfo)) {
+    if (isAlreadyExisting(friends, friendInfo)) {
       alert('입력하신 친구의 정보는 이미 존재합니다.');
     } else {
       dispatch(addFriend(friendInfo));
